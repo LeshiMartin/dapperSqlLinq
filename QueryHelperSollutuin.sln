@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30128.36
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryHelper", "QueryHelper\QueryHelper.csproj", "{8967EF22-8888-4D61-BD59-2D04541ADC4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryHelperTests", "QueryHelperTests\QueryHelperTests.csproj", "{A6EF4ACE-3379-4013-97C1-481DB8A467D9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8967EF22-8888-4D61-BD59-2D04541ADC4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8967EF22-8888-4D61-BD59-2D04541ADC4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8967EF22-8888-4D61-BD59-2D04541ADC4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8967EF22-8888-4D61-BD59-2D04541ADC4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6EF4ACE-3379-4013-97C1-481DB8A467D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6EF4ACE-3379-4013-97C1-481DB8A467D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6EF4ACE-3379-4013-97C1-481DB8A467D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6EF4ACE-3379-4013-97C1-481DB8A467D9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BEB8F781-2417-47A7-9A9A-B07D60951C0E}
+	EndGlobalSection
+EndGlobal
