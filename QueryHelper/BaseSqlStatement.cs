@@ -347,6 +347,16 @@ namespace QueryHelper
             return new WhereStatement<TEntity, TModel>(StringQuery, Model);
         }
 
+        public WhereStatement<TEntity, TModel> Where<T1,TModel>(Expression<Func<T1, object>> prop,
+            Expression<Func<TModel, object>> param) where TModel : class where T1: class
+        {
+
+            var propName = prop.GetExpressionParameter();
+            var paramName = param.GetExpressionParameter();
+            StringQuery.Append($" WHERE {typeof(T1).Name}.{propName} = @{paramName}");
+            return new WhereStatement<TEntity, TModel>(StringQuery, Model);
+        }
+
         /// <summary>
         /// Wheres the like.
         /// </summary>
@@ -361,6 +371,16 @@ namespace QueryHelper
             var propName = prop.GetExpressionParameter();
             var paramName = param.GetExpressionParameter();
             StringQuery.Append($" WHERE {typeof(TEntity).Name}.{propName} LIKE @{paramName} ");
+            ModelValues[paramName] = "%" + ModelValues[paramName] + "%";
+            return new WhereStatement<TEntity, TModel>(StringQuery, Model);
+        }
+        public WhereStatement<TEntity, TModel> WhereLike<T1,TModel>(Expression<Func<T1, object>> prop,
+            Expression<Func<TModel, object>> param) where TModel : class where T1:class
+        {
+
+            var propName = prop.GetExpressionParameter();
+            var paramName = param.GetExpressionParameter();
+            StringQuery.Append($" WHERE {typeof(T1).Name}.{propName} LIKE @{paramName} ");
             ModelValues[paramName] = "%" + ModelValues[paramName] + "%";
             return new WhereStatement<TEntity, TModel>(StringQuery, Model);
         }
