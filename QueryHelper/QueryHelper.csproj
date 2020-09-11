@@ -2,6 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>DSLINQ</PackageId>
+    <Version>1.1.4</Version>
+    <Authors>martin_leshi</Authors>
+    <Description>
+      Extensions for creating Dapper Sql Statements
+     Updated the Where And and OR Statements
+    </Description>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+  </ItemGroup>
 
 </Project>

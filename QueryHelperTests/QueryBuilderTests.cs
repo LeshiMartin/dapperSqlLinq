@@ -64,7 +64,7 @@ namespace QueryHelperTests
         public void SelectStatement_Model_IsNotNull()
         {
             var selectStatement = MockClass.Select();
-            Assert.IsNotNull(selectStatement.Model);
+            Assert.IsNull(selectStatement.Model);
         }
         [Test]
         public void SelectStatement_Query_HasSelect()
@@ -98,11 +98,10 @@ namespace QueryHelperTests
             Assert.That(deleteStatement.Query.Contains("dbo.Test"));
         }
 
-
         [Test]
         public void DeleteStatementWith_CanPass_the_Model()
         {
-            var deleteStatement = typeof(MockClass).Delete<MockClass>("dbo.Test",new MockClass());
+            var deleteStatement = typeof(MockClass).Delete<MockClass>("dbo.Test", new MockClass());
             Assert.IsNotNull(deleteStatement);
             Assert.That(deleteStatement.Query.Contains("dbo.Test"));
         }
@@ -119,7 +118,7 @@ namespace QueryHelperTests
         public void SelectStatementChainedWithWhereLike_ContainsLike()
         {
             var statement = MockClass.Select().WhereLike(x => x.UserName);
-            Assert.IsNotNull(statement.Model);
+            Assert.IsNull(statement.Model);
             Assert.That(statement.Query.Contains("LIKE"));
         }
 
@@ -147,7 +146,7 @@ namespace QueryHelperTests
         [Test]
         public void UpdateStatement_On_Type_Can_ChainWith_WhereStatement()
         {
-            var up = typeof(MockClass).Update<MockClass>("dbo.Table").WhereEqualsFor(x=>x.Id);
+            var up = typeof(MockClass).Update<MockClass>("dbo.Table").Where(x => x.Id);
             Assert.IsNotNull(up);
             Assert.IsNotNull(up.Query);
             Assert.IsNull(up.Model);
@@ -189,7 +188,7 @@ namespace QueryHelperTests
         [Test]
         public void SelectStatement_Can_BeChainedWith_GroupBy()
         {
-            var grouped = typeof(MockClass).Select<MockClass>().GroupBy(x=>x.Name);
+            var grouped = typeof(MockClass).Select<MockClass>().GroupBy(x => x.Name);
             Assert.IsNotNull(grouped);
             Assert.IsNull(grouped.Model);
             Assert.That(grouped.Query.Contains("GROUP BY"));
@@ -220,7 +219,7 @@ namespace QueryHelperTests
         public void AndStatement_Can_Be_Chained_With_GroupBy()
         {
             var grouped = typeof(MockClass).Select<MockClass>(new MockClass()).Where(x => x.LastName)
-                .And(x => x.Name).GroupBy(x=>x.UserName);
+                .And(x => x.Name).GroupBy(x => x.UserName);
 
             Assert.IsNotNull(grouped);
             Assert.IsNotNull(grouped.Model);
@@ -234,7 +233,7 @@ namespace QueryHelperTests
         public void OrStatement_Can_BeChained_With_Group_By()
         {
             var grouped = typeof(MockClass).Select<MockClass>("dbo.User", new MockClass()).WhereLike(x => x.LastName)
-                .And(x => x.Name).Or(x => x.UserName).GroupBy(x=>x.UserName);
+                .And(x => x.Name).Or(x => x.UserName).GroupBy(x => x.UserName);
 
             Assert.IsNotNull(grouped);
             Assert.IsNotNull(grouped.Model);
@@ -322,14 +321,34 @@ namespace QueryHelperTests
         {
             try
             {
-
-                var groupBy = typeof(MockClass).SelectDistinct<MockClass>(x => x.LastName, x => x.Name)
+                typeof(MockClass).SelectDistinct<MockClass>(x => x.LastName, x => x.Name)
                     .GroupBy(x => x.UserName);
             }
             catch (ArgumentException exc)
             {
                 Assert.That(exc.Message.Contains("SELECT"));
             }
+        }
+        
+        [Test]
+        public void Join_Table_With_Another_Is_NotNull()
+        {
+            var joined = MockClass.Join<MockClass, OtherMock>(x => x.Id, x => x.MockId);
+            Assert.IsNotNull(joined);
+            Assert.IsNotNull(joined.Query);
+        }
+
+        [Test]
+        public void Where_With_TwoGenerics_Is_NotNull()
+        {
+            var searchModel = new SearchModel()
+            {
+                MockId = 1
+            };
+            var select = MockClass.Select(searchModel).Where<SearchModel>(x => x.Id, x => x.MockId);
+            Assert.IsNotNull(select);
+            Assert.IsNotNull(select.Query);
+            Assert.That(select.Query.Contains("MockId"));
         }
 
     }

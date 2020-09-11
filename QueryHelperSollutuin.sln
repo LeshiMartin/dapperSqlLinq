@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30128.36
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryHelper", "QueryHelper\QueryHelper.csproj", "{8967EF22-8888-4D61-BD59-2D04541ADC4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QueryHelper", "QueryHelper\QueryHelper.csproj", "{8967EF22-8888-4D61-BD59-2D04541ADC4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryHelperTests", "QueryHelperTests\QueryHelperTests.csproj", "{A6EF4ACE-3379-4013-97C1-481DB8A467D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QueryHelperTests", "QueryHelperTests\QueryHelperTests.csproj", "{A6EF4ACE-3379-4013-97C1-481DB8A467D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegratedTests", "IntegratedTests\IntegratedTests.csproj", "{FC3691C9-CDBA-4087-9884-9C21DBAB65CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{A6EF4ACE-3379-4013-97C1-481DB8A467D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6EF4ACE-3379-4013-97C1-481DB8A467D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6EF4ACE-3379-4013-97C1-481DB8A467D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC3691C9-CDBA-4087-9884-9C21DBAB65CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC3691C9-CDBA-4087-9884-9C21DBAB65CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC3691C9-CDBA-4087-9884-9C21DBAB65CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC3691C9-CDBA-4087-9884-9C21DBAB65CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
