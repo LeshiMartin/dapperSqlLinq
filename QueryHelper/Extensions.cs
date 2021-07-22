@@ -23,6 +23,14 @@ namespace QueryHelper
             }
         }
 
+        public static string GetNameFromType(this Type type)
+        {
+            var name = type.Name;
+            if (name.Contains("User"))
+                name = $"[{name}]";
+            return name;
+        }
+
         public static object ToObject(this IDictionary<string, object> objectValues, object obj)
         {
             

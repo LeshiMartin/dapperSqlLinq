@@ -3,11 +3,14 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>DSLINQ</PackageId>
-    <Version>1.1.4</Version>
+    <Version>1.2.1</Version>
     <Authors>martin_leshi</Authors>
+    <Language>C#</Language>
+    <RepositoryUrl>
+      https://github.com/LeshiMartin/dapperSqlLinq
+    </RepositoryUrl>
     <Description>
-      Extensions for creating Dapper Sql Statements
-     Updated the Where And and OR Statements
+      Extended The Join and Left join with Join on and Left Join on where it returns the original Entity
     </Description>
   </PropertyGroup>
   <ItemGroup>

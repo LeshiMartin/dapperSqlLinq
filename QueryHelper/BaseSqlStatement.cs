@@ -243,7 +243,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             StringQuery.AppendLine(
-                $"JOIN dbo.{typeof(T2).Name} AS {typeof(T2).Name} ON {typeof(TEntity).Name}.{innKey} = {typeof(T2).Name}.{outKey}");
+                $"JOIN dbo.{typeof(T2).GetNameFromType()} AS {typeof(T2).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(T2).GetNameFromType()}.{outKey}");
 
             return new JoinStatement<T2>(StringQuery, Model);
         }
@@ -253,7 +253,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             StringQuery.AppendLine(
-                $"JOIN {outerTable} AS {typeof(T2).Name} ON {typeof(TEntity).Name}.{innKey} = {typeof(T2).Name}.{outKey}");
+                $"JOIN {outerTable} AS {typeof(T2).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(T2).GetNameFromType()}.{outKey}");
 
             return new JoinStatement<T2>(StringQuery, Model);
         }
@@ -263,7 +263,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             StringQuery.AppendLine(
-                $"LEFT JOIN dbo.{typeof(T2).Name} AS {typeof(T2).Name} ON {typeof(TEntity).Name}.{innKey} = {typeof(T2).Name}.{outKey}");
+                $"LEFT JOIN dbo.{typeof(T2).GetNameFromType()} AS {typeof(T2).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(T2).GetNameFromType()}.{outKey}");
 
             return new JoinStatement<T2>(StringQuery, Model);
         }
@@ -273,7 +273,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             StringQuery.AppendLine(
-                $"LEFT JOIN {outerTable} AS {typeof(T2).Name} ON {typeof(TEntity).Name}.{innKey} = {typeof(T2).Name}.{outKey}");
+                $"LEFT JOIN {outerTable} AS {typeof(T2).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(T2).GetNameFromType()}.{outKey}");
 
             return new JoinStatement<T2>(StringQuery, Model);
         }
@@ -303,6 +303,14 @@ namespace QueryHelper
             ModelValues[prop] = "%" + ModelValues[prop] + "%";
             return new WhereStatement<TEntity>(StringQuery, Model);
         }
+
+        public WhereStatement<TEntity> WhereQuery(string query)
+        {
+
+            StringQuery.Append(query);
+            return new WhereStatement<TEntity>(StringQuery, Model);
+        }
+
 
         /// <summary>
         /// Wheres the in.
@@ -343,17 +351,17 @@ namespace QueryHelper
 
             var propName = prop.GetExpressionParameter();
             var paramName = param.GetExpressionParameter();
-            StringQuery.Append($" WHERE {typeof(TEntity).Name}.{propName} = @{paramName}");
+            StringQuery.Append($" WHERE {typeof(TEntity).GetNameFromType()}.{propName} = @{paramName}");
             return new WhereStatement<TEntity, TModel>(StringQuery, Model);
         }
 
-        public WhereStatement<TEntity, TModel> Where<T1,TModel>(Expression<Func<T1, object>> prop,
-            Expression<Func<TModel, object>> param) where TModel : class where T1: class
+        public WhereStatement<TEntity, TModel> Where<T1, TModel>(Expression<Func<T1, object>> prop,
+            Expression<Func<TModel, object>> param) where TModel : class where T1 : class
         {
 
             var propName = prop.GetExpressionParameter();
             var paramName = param.GetExpressionParameter();
-            StringQuery.Append($" WHERE {typeof(T1).Name}.{propName} = @{paramName}");
+            StringQuery.Append($" WHERE {typeof(T1).GetNameFromType()}.{propName} = @{paramName}");
             return new WhereStatement<TEntity, TModel>(StringQuery, Model);
         }
 
@@ -370,17 +378,17 @@ namespace QueryHelper
 
             var propName = prop.GetExpressionParameter();
             var paramName = param.GetExpressionParameter();
-            StringQuery.Append($" WHERE {typeof(TEntity).Name}.{propName} LIKE @{paramName} ");
+            StringQuery.Append($" WHERE {typeof(TEntity).GetNameFromType()}.{propName} LIKE @{paramName} ");
             ModelValues[paramName] = "%" + ModelValues[paramName] + "%";
             return new WhereStatement<TEntity, TModel>(StringQuery, Model);
         }
-        public WhereStatement<TEntity, TModel> WhereLike<T1,TModel>(Expression<Func<T1, object>> prop,
-            Expression<Func<TModel, object>> param) where TModel : class where T1:class
+        public WhereStatement<TEntity, TModel> WhereLike<T1, TModel>(Expression<Func<T1, object>> prop,
+            Expression<Func<TModel, object>> param) where TModel : class where T1 : class
         {
 
             var propName = prop.GetExpressionParameter();
             var paramName = param.GetExpressionParameter();
-            StringQuery.Append($" WHERE {typeof(T1).Name}.{propName} LIKE @{paramName} ");
+            StringQuery.Append($" WHERE {typeof(T1).GetNameFromType()}.{propName} LIKE @{paramName} ");
             ModelValues[paramName] = "%" + ModelValues[paramName] + "%";
             return new WhereStatement<TEntity, TModel>(StringQuery, Model);
         }
@@ -452,6 +460,17 @@ namespace QueryHelper
             StringQuery.Append($" WHERE {prop} LIKE @{prop} ");
             ModelValues[prop] = "%" + ModelValues[prop] + "%";
             return new WhereStatement<TEntity>(StringQuery, Model);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public WhereStatement<TEntity> WhereQuery(string query)
+        {
+            StringQuery.Append(query);
+            return new WhereStatement<TEntity>(Query, Model);
         }
 
         /// <summary>
@@ -676,7 +695,7 @@ namespace QueryHelper
         {
             var propName = param.GetExpressionParameter();
             var searchPropName = searchProp.GetExpressionParameter();
-            StringQuery.Append($" AND {typeof(T1).Name}.{propName} = @{searchPropName}");
+            StringQuery.Append($" AND {typeof(T1).GetNameFromType()}.{propName} = @{searchPropName}");
             return new AndStatement<T1, T2>(StringQuery, Model);
         }
 
@@ -684,7 +703,7 @@ namespace QueryHelper
         {
             var propName = param.GetExpressionParameter();
             var searchPropName = searchProp.GetExpressionParameter();
-            StringQuery.Append($" AND {typeof(T3).Name}.{propName} = @{searchPropName}");
+            StringQuery.Append($" AND {typeof(T3).GetNameFromType()}.{propName} = @{searchPropName}");
             return new AndStatement<T1, T2>(StringQuery, Model);
         }
 
@@ -692,7 +711,7 @@ namespace QueryHelper
         {
             var propName = param.GetExpressionParameter();
             var searchPropName = searchProp.GetExpressionParameter();
-            StringQuery.Append($" AND {typeof(T1).Name}.{propName} LIKE @{searchPropName}");
+            StringQuery.Append($" AND {typeof(T1).GetNameFromType()}.{propName} LIKE @{searchPropName}");
             ModelValues[propName] = "%" + ModelValues[searchPropName] + "%";
             return new AndStatement<T1, T2>(StringQuery, Model);
         }
@@ -701,9 +720,54 @@ namespace QueryHelper
         {
             var propName = param.GetExpressionParameter();
             var searchPropName = searchProp.GetExpressionParameter();
-            StringQuery.Append($" AND {typeof(T3).Name}.{propName} LIKE @{searchPropName}");
+            StringQuery.Append($" AND {typeof(T3).GetNameFromType()}.{propName} LIKE @{searchPropName}");
             ModelValues[propName] = "%" + ModelValues[searchPropName] + "%";
             return new AndStatement<T1, T2>(StringQuery, Model);
+        }
+
+        public OrStatement<T1, T2> Or(Expression<Func<T1, object>> param, Expression<Func<T2, object>> searchProp)
+        {
+            var propName = param.GetExpressionParameter();
+            var searchPropName = searchProp.GetExpressionParameter();
+            StringQuery.Append($" OR {typeof(T1).GetNameFromType()}.{propName} = @{searchPropName}");
+            return new OrStatement<T1, T2>(StringQuery, Model);
+        }
+        public OrStatement<T1, T2> Or(Expression<Func<T1, object>> param, string searchProp)
+        {
+            var propName = param.GetExpressionParameter();
+            StringQuery.Append($" OR {typeof(T1).GetNameFromType()}.{propName} = '{searchProp}'");
+            return new OrStatement<T1, T2>(StringQuery, Model);
+        }
+        public OrStatement<T1, T2> Or<T3>(Expression<Func<T3, object>> param, string searchProp) where T3 : class
+        {
+            var propName = param.GetExpressionParameter();
+            StringQuery.Append($" OR {typeof(T3).GetNameFromType()}.{propName} = '{searchProp}'");
+            return new OrStatement<T1, T2>(StringQuery, Model);
+        }
+        public OrStatement<T1, T2> Or<T3>(Expression<Func<T3, object>> param, Expression<Func<T2, object>> searchProp) where T3 : class
+        {
+            var propName = param.GetExpressionParameter();
+            var searchPropName = searchProp.GetExpressionParameter();
+            StringQuery.Append($" OR {typeof(T3).GetNameFromType()}.{propName} = @{searchPropName}");
+            return new OrStatement<T1, T2>(StringQuery, Model);
+        }
+
+        public OrStatement<T1, T2> OrLike(Expression<Func<T1, object>> param, Expression<Func<T2, object>> searchProp)
+        {
+            var propName = param.GetExpressionParameter();
+            var searchPropName = searchProp.GetExpressionParameter();
+            StringQuery.Append($" OR {typeof(T1).GetNameFromType()}.{propName} LIKE @{searchPropName} ");
+            ModelValues[propName] = "%" + ModelValues[propName] + "%";
+            return new OrStatement<T1, T2>(StringQuery, Model);
+        }
+
+        public OrStatement<T1, T2> OrLike<T3>(Expression<Func<T3, object>> param, Expression<Func<T2, object>> searchProp) where T3 : class
+        {
+            var propName = param.GetExpressionParameter();
+            var searchPropName = searchProp.GetExpressionParameter();
+            StringQuery.Append($" OR {typeof(T3).GetNameFromType()}.{propName} LIKE @{searchPropName} ");
+            ModelValues[propName] = "%" + ModelValues[propName] + "%";
+            return new OrStatement<T1, T2>(StringQuery, Model);
         }
 
         public OrderByStatement<T1> OrderBy(string propName)
@@ -753,26 +817,26 @@ namespace QueryHelper
         {
             var propName = param.GetExpressionParameter();
             var searchPropName = searchProp.GetExpressionParameter();
-            StringQuery.Append($" AND {typeof(T1).Name}.{propName} = @{searchPropName}");
+            StringQuery.Append($" AND {typeof(T1).GetNameFromType()}.{propName} = @{searchPropName}");
             return new AndStatement<T1, T2>(StringQuery, Model);
         }
         public AndStatement<T1, T2> And(Expression<Func<T1, object>> param, string searchProp)
         {
             var propName = param.GetExpressionParameter();
-            StringQuery.Append($" AND {typeof(T1).Name}.{propName} = '{searchProp}'");
+            StringQuery.Append($" AND {typeof(T1).GetNameFromType()}.{propName} = '{searchProp}'");
             return new AndStatement<T1, T2>(StringQuery, Model);
         }
         public AndStatement<T1, T2> And<T3>(Expression<Func<T1, object>> param, string searchProp) where T3 : class
         {
             var propName = param.GetExpressionParameter();
-            StringQuery.Append($" AND {typeof(T3).Name}.{propName} = '{searchProp}'");
+            StringQuery.Append($" AND {typeof(T3).GetNameFromType()}.{propName} = '{searchProp}'");
             return new AndStatement<T1, T2>(StringQuery, Model);
         }
         public AndStatement<T1, T2> And<T3>(Expression<Func<T3, object>> param, Expression<Func<T2, object>> searchProp) where T3 : class
         {
             var propName = param.GetExpressionParameter();
             var searchPropName = searchProp.GetExpressionParameter();
-            StringQuery.Append($" AND {typeof(T3).Name}.{propName} = @{searchPropName}");
+            StringQuery.Append($" AND {typeof(T3).GetNameFromType()}.{propName} = @{searchPropName}");
             return new AndStatement<T1, T2>(StringQuery, Model);
         }
 
@@ -780,7 +844,7 @@ namespace QueryHelper
         {
             var propName = param.GetExpressionParameter();
             var searchPropName = searchProp.GetExpressionParameter();
-            StringQuery.Append($" AND {typeof(T1).Name}.{propName} LIKE @{searchPropName} ");
+            StringQuery.Append($" AND {typeof(T1).GetNameFromType()}.{propName} LIKE @{searchPropName} ");
             ModelValues[propName] = "%" + ModelValues[searchPropName] + "%";
             return new AndStatement<T1, T2>(StringQuery, Model);
         }
@@ -789,7 +853,7 @@ namespace QueryHelper
         {
             var propName = param.GetExpressionParameter();
             var searchPropName = searchProp.GetExpressionParameter();
-            StringQuery.Append($" AND {typeof(T3).Name}.{propName} LIKE @{searchPropName} ");
+            StringQuery.Append($" AND {typeof(T3).GetNameFromType()}.{propName} LIKE @{searchPropName} ");
             ModelValues[propName] = "%" + ModelValues[searchPropName] + "%";
             return new AndStatement<T1, T2>(StringQuery, Model);
         }
@@ -798,26 +862,26 @@ namespace QueryHelper
         {
             var propName = param.GetExpressionParameter();
             var searchPropName = searchProp.GetExpressionParameter();
-            StringQuery.Append($" OR {typeof(T1).Name}.{propName} = @{searchPropName}");
+            StringQuery.Append($" OR {typeof(T1).GetNameFromType()}.{propName} = @{searchPropName}");
             return new OrStatement<T1, T2>(StringQuery, Model);
         }
         public OrStatement<T1, T2> Or(Expression<Func<T1, object>> param, string searchProp)
         {
             var propName = param.GetExpressionParameter();
-            StringQuery.Append($" OR {typeof(T1).Name}.{propName} = '{searchProp}'");
+            StringQuery.Append($" OR {typeof(T1).GetNameFromType()}.{propName} = '{searchProp}'");
             return new OrStatement<T1, T2>(StringQuery, Model);
         }
         public OrStatement<T1, T2> Or<T3>(Expression<Func<T3, object>> param, string searchProp) where T3 : class
         {
             var propName = param.GetExpressionParameter();
-            StringQuery.Append($" OR {typeof(T3).Name}.{propName} = '{searchProp}'");
+            StringQuery.Append($" OR {typeof(T3).GetNameFromType()}.{propName} = '{searchProp}'");
             return new OrStatement<T1, T2>(StringQuery, Model);
         }
         public OrStatement<T1, T2> Or<T3>(Expression<Func<T3, object>> param, Expression<Func<T2, object>> searchProp) where T3 : class
         {
             var propName = param.GetExpressionParameter();
             var searchPropName = searchProp.GetExpressionParameter();
-            StringQuery.Append($" OR {typeof(T3).Name}.{propName} = @{searchPropName}");
+            StringQuery.Append($" OR {typeof(T3).GetNameFromType()}.{propName} = @{searchPropName}");
             return new OrStatement<T1, T2>(StringQuery, Model);
         }
 
@@ -825,7 +889,7 @@ namespace QueryHelper
         {
             var propName = param.GetExpressionParameter();
             var searchPropName = searchProp.GetExpressionParameter();
-            StringQuery.Append($" OR {typeof(T1).Name}.{propName} LIKE @{searchPropName} ");
+            StringQuery.Append($" OR {typeof(T1).GetNameFromType()}.{propName} LIKE @{searchPropName} ");
             ModelValues[propName] = "%" + ModelValues[propName] + "%";
             return new OrStatement<T1, T2>(StringQuery, Model);
         }
@@ -834,7 +898,7 @@ namespace QueryHelper
         {
             var propName = param.GetExpressionParameter();
             var searchPropName = searchProp.GetExpressionParameter();
-            StringQuery.Append($" OR {typeof(T3).Name}.{propName} LIKE @{searchPropName} ");
+            StringQuery.Append($" OR {typeof(T3).GetNameFromType()}.{propName} LIKE @{searchPropName} ");
             ModelValues[propName] = "%" + ModelValues[propName] + "%";
             return new OrStatement<T1, T2>(StringQuery, Model);
         }
@@ -871,21 +935,21 @@ namespace QueryHelper
         {
             var propName = param.GetExpressionParameter();
             var searchPropName = searchProp.GetExpressionParameter();
-            StringQuery.Append($" AND {typeof(T1).Name}.{propName} = @{searchPropName}");
+            StringQuery.Append($" AND {typeof(T1).GetNameFromType()}.{propName} = @{searchPropName}");
             return new AndStatement<T1, T2>(StringQuery, Model);
         }
 
         public AndStatement<T1, T2> And(Expression<Func<T1, object>> param, string searchProp)
         {
             var propName = param.GetExpressionParameter();
-            StringQuery.Append($" AND {typeof(T1).Name}.{propName} = '{searchProp}'");
+            StringQuery.Append($" AND {typeof(T1).GetNameFromType()}.{propName} = '{searchProp}'");
             return new AndStatement<T1, T2>(StringQuery, Model);
         }
 
         public AndStatement<T1, T2> And<T3>(Expression<Func<T1, object>> param, string searchProp) where T3 : class
         {
             var propName = param.GetExpressionParameter();
-            StringQuery.Append($" AND {typeof(T3).Name}.{propName} = '{searchProp}'");
+            StringQuery.Append($" AND {typeof(T3).GetNameFromType()}.{propName} = '{searchProp}'");
             return new AndStatement<T1, T2>(StringQuery, Model);
         }
 
@@ -893,7 +957,7 @@ namespace QueryHelper
         {
             var propName = param.GetExpressionParameter();
             var searchPropName = searchProp.GetExpressionParameter();
-            StringQuery.Append($" AND {typeof(T3).Name}.{propName} = @{searchPropName}");
+            StringQuery.Append($" AND {typeof(T3).GetNameFromType()}.{propName} = @{searchPropName}");
             return new AndStatement<T1, T2>(StringQuery, Model);
         }
 
@@ -901,7 +965,7 @@ namespace QueryHelper
         {
             var propName = param.GetExpressionParameter();
             var searchPropName = searchProp.GetExpressionParameter();
-            StringQuery.Append($" AND {typeof(T1).Name}.{propName} LIKE @{searchPropName} ");
+            StringQuery.Append($" AND {typeof(T1).GetNameFromType()}.{propName} LIKE @{searchPropName} ");
             ModelValues[propName] = "%" + ModelValues[searchPropName] + "%";
             return new AndStatement<T1, T2>(StringQuery, Model);
         }
@@ -910,7 +974,7 @@ namespace QueryHelper
         {
             var propName = param.GetExpressionParameter();
             var searchPropName = searchProp.GetExpressionParameter();
-            StringQuery.Append($" AND {typeof(T3).Name}.{propName} LIKE @{searchPropName} ");
+            StringQuery.Append($" AND {typeof(T3).GetNameFromType()}.{propName} LIKE @{searchPropName} ");
             ModelValues[propName] = "%" + ModelValues[searchPropName] + "%";
             return new AndStatement<T1, T2>(StringQuery, Model);
         }
@@ -919,26 +983,26 @@ namespace QueryHelper
         {
             var propName = param.GetExpressionParameter();
             var searchPropName = searchProp.GetExpressionParameter();
-            StringQuery.Append($" OR {typeof(T1).Name}.{propName} = @{searchPropName}");
+            StringQuery.Append($" OR {typeof(T1).GetNameFromType()}.{propName} = @{searchPropName}");
             return new OrStatement<T1, T2>(StringQuery, Model);
         }
         public OrStatement<T1, T2> Or(Expression<Func<T1, object>> param, string searchProp)
         {
             var propName = param.GetExpressionParameter();
-            StringQuery.Append($" OR {typeof(T1).Name}.{propName} = '{searchProp}'");
+            StringQuery.Append($" OR {typeof(T1).GetNameFromType()}.{propName} = '{searchProp}'");
             return new OrStatement<T1, T2>(StringQuery, Model);
         }
         public OrStatement<T1, T2> Or<T3>(Expression<Func<T3, object>> param, string searchProp) where T3 : class
         {
             var propName = param.GetExpressionParameter();
-            StringQuery.Append($" OR {typeof(T3).Name}.{propName} = '{searchProp}'");
+            StringQuery.Append($" OR {typeof(T3).GetNameFromType()}.{propName} = '{searchProp}'");
             return new OrStatement<T1, T2>(StringQuery, Model);
         }
         public OrStatement<T1, T2> Or<T3>(Expression<Func<T3, object>> param, Expression<Func<T2, object>> searchProp) where T3 : class
         {
             var propName = param.GetExpressionParameter();
             var searchPropName = searchProp.GetExpressionParameter();
-            StringQuery.Append($" OR {typeof(T3).Name}.{propName} = @{searchPropName}");
+            StringQuery.Append($" OR {typeof(T3).GetNameFromType()}.{propName} = @{searchPropName}");
             return new OrStatement<T1, T2>(StringQuery, Model);
         }
 
@@ -946,7 +1010,7 @@ namespace QueryHelper
         {
             var propName = param.GetExpressionParameter();
             var searchPropName = searchProp.GetExpressionParameter();
-            StringQuery.Append($" OR {typeof(T1).Name}.{propName} LIKE @{searchPropName} ");
+            StringQuery.Append($" OR {typeof(T1).GetNameFromType()}.{propName} LIKE @{searchPropName} ");
             ModelValues[propName] = "%" + ModelValues[propName] + "%";
             return new OrStatement<T1, T2>(StringQuery, Model);
         }
@@ -955,7 +1019,7 @@ namespace QueryHelper
         {
             var propName = param.GetExpressionParameter();
             var searchPropName = searchProp.GetExpressionParameter();
-            StringQuery.Append($" OR {typeof(T3).Name}.{propName} LIKE @{searchPropName} ");
+            StringQuery.Append($" OR {typeof(T3).GetNameFromType()}.{propName} LIKE @{searchPropName} ");
             ModelValues[propName] = "%" + ModelValues[propName] + "%";
             return new OrStatement<T1, T2>(StringQuery, Model);
         }
@@ -1465,6 +1529,12 @@ namespace QueryHelper
             StringQuery.Append($", {propName} DESC");
             return new OrderByDescendingStatement<TEntity>(StringQuery, Model);
         }
+
+        public PageStatement Page()
+        {
+            StringQuery.Append(" OFFSET (@Offset) ROWS FETCH NEXT (@limit) ROWS ONLY");
+            return new PageStatement(StringQuery, Model);
+        }
     }
 
     public class OrderByDescendingStatement<TEntity> : BaseSqlStatement where TEntity : class
@@ -1489,7 +1559,7 @@ namespace QueryHelper
 
         public PageStatement Page()
         {
-            StringQuery.Append("OFFSET (@Offset) ROWS FETCH NEXT (@limit) ROWS ONLY");
+            StringQuery.Append(" OFFSET (@Offset) ROWS FETCH NEXT (@limit) ROWS ONLY");
             return new PageStatement(StringQuery, Model);
         }
     }
