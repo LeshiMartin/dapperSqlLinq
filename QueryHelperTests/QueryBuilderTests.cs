@@ -339,6 +339,23 @@ namespace QueryHelperTests
         }
 
         [Test]
+        public void JoinOn_Table_With_Another_WithTableSpecified_Is_NotNull()
+        {
+            var joined = MockClass.JoinOn<MockClass, OtherMock>("dbo.Mock",x=>x.Id,x=>x.MockId);
+            Assert.IsNotNull(joined);
+            Assert.IsNotNull(joined.Query);
+        }
+
+        [Test]
+        public void JoinOn_Table_With_Another_Is_NotNull()
+        {
+            var joined = MockClass.JoinOn<MockClass, OtherMock>( x => x.Id, x => x.MockId);
+            Assert.IsNotNull(joined);
+            Assert.IsNotNull(joined.Query);
+        }
+
+
+        [Test]
         public void Where_With_TwoGenerics_Is_NotNull()
         {
             var searchModel = new SearchModel()

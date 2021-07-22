@@ -258,6 +258,26 @@ namespace QueryHelper
             return new JoinStatement<T2>(StringQuery, Model);
         }
 
+        public JoinStatement<T2> JoinOn<T2>(Expression<Func<TEntity, object>> innerKey, Expression<Func<T2, object>> outerKey) where T2 : class
+        {
+            var innKey = innerKey.GetExpressionParameter();
+            var outKey = outerKey.GetExpressionParameter();
+            StringQuery.AppendLine(
+                $"JOIN dbo.{typeof(T2).GetNameFromType()} AS {typeof(T2).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(T2).GetNameFromType()}.{outKey}");
+
+            return new JoinStatement<T2>(StringQuery, Model);
+        }
+
+        public JoinStatement<TEntity> JoinOn<T2>(Expression<Func<TEntity, object>> innerKey, Expression<Func<T2, object>> outerKey, string outerTable) where T2 : class
+        {
+            var innKey = innerKey.GetExpressionParameter();
+            var outKey = outerKey.GetExpressionParameter();
+            StringQuery.AppendLine(
+                $"JOIN {outerTable} AS {typeof(T2).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(T2).GetNameFromType()}.{outKey}");
+
+            return new JoinStatement<TEntity>(StringQuery, Model);
+        }
+
         public JoinStatement<T2> LeftJoin<T2>(Expression<Func<TEntity, object>> innerKey, Expression<Func<T2, object>> outerKey) where T2 : class
         {
             var innKey = innerKey.GetExpressionParameter();
@@ -277,6 +297,27 @@ namespace QueryHelper
 
             return new JoinStatement<T2>(StringQuery, Model);
         }
+
+        public JoinStatement<TEntity> LeftJoinOn<T2>(Expression<Func<TEntity, object>> innerKey, Expression<Func<T2, object>> outerKey) where T2 : class
+        {
+            var innKey = innerKey.GetExpressionParameter();
+            var outKey = outerKey.GetExpressionParameter();
+            StringQuery.AppendLine(
+                $"LEFT JOIN dbo.{typeof(T2).GetNameFromType()} AS {typeof(T2).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(T2).GetNameFromType()}.{outKey}");
+
+            return new JoinStatement<TEntity>(StringQuery, Model);
+        }
+
+        public JoinStatement<TEntity> LeftJoinOn<T2>(Expression<Func<TEntity, object>> innerKey, Expression<Func<T2, object>> outerKey, string outerTable) where T2 : class
+        {
+            var innKey = innerKey.GetExpressionParameter();
+            var outKey = outerKey.GetExpressionParameter();
+            StringQuery.AppendLine(
+                $"LEFT JOIN {outerTable} AS {typeof(T2).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(T2).GetNameFromType()}.{outKey}");
+
+            return new JoinStatement<TEntity>(StringQuery, Model);
+        }
+
         public WhereStatement<TEntity> Where(Expression<Func<TEntity, object>> param)
         {
             var prop = param.GetExpressionParameter();

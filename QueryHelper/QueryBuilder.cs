@@ -539,6 +539,31 @@ namespace QueryHelper
             return new SelectDistinctStatement<TEntity>(new StringBuilder(string.Format(queryStr, propNames)), model);
         }
 
+       
+
+        /// <summary>
+        /// Gets the select values.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="t">The t.</param>
+        /// <returns></returns>
+        public static string[] GetSelectValues<T>(this T t) where T : class
+        {
+            var properties = t.GetType().GetProperties().Select(x => $"{typeof(T).Name}.{x.Name} AS {typeof(T).Name}{x.Name}").ToArray();
+            return properties;
+        }
+
+        /// <summary>
+        /// Gets the select values.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="t">The t.</param>
+        /// <returns></returns>
+        public static string[] GetSelectValues(Type t) { 
+            var properties = t.GetProperties().Select(x => $"{t.Name}.{x.Name} AS {t.Name}{x.Name}").ToArray();
+            return properties;
+        }
+
         /// <summary>
         /// Joins the specified inner key.
         /// </summary>
@@ -582,29 +607,6 @@ namespace QueryHelper
             var st = new StringBuilder($"SELECT * FROM dbo.{typeof(TEntity).GetNameFromType()} AS {typeof(TEntity).GetNameFromType()}");
             st.AppendLine($" JOIN dbo.{typeof(TModel).GetNameFromType()} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} =  {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TModel>(st, model);
-        }
-
-        /// <summary>
-        /// Gets the select values.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="t">The t.</param>
-        /// <returns></returns>
-        public static string[] GetSelectValues<T>(this T t) where T : class
-        {
-            var properties = t.GetType().GetProperties().Select(x => $"{typeof(T).Name}.{x.Name} AS {typeof(T).Name}{x.Name}").ToArray();
-            return properties;
-        }
-
-        /// <summary>
-        /// Gets the select values.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="t">The t.</param>
-        /// <returns></returns>
-        public static string[] GetSelectValues(Type t) { 
-            var properties = t.GetProperties().Select(x => $"{t.Name}.{x.Name} AS {t.Name}{x.Name}").ToArray();
-            return properties;
         }
 
         /// <summary>
@@ -874,6 +876,52 @@ namespace QueryHelper
             st.AppendLine($" JOIN dbo.{joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TModel>(st);
         }
+
+        /// <summary>
+        /// Joins the specified inner key.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entity.</typeparam>
+        /// <typeparam name="TModel">The type of the model.</typeparam>
+        /// <param name="entity">The entity.</param>
+        /// <param name="innerKey">The inner key.</param>
+        /// <param name="outerKey">The outer key.</param>
+        /// <returns></returns>
+        public static JoinStatement<TEntity> JoinOn<TEntity, TModel>(this TEntity entity,
+            Expression<Func<TEntity, object>> innerKey, Expression<Func<TModel, object>> outerKey) where TEntity : class
+            where TModel : class
+        {
+
+            var innKey = innerKey.GetExpressionParameter();
+            var outKey = outerKey.GetExpressionParameter();
+            var st = new StringBuilder($"SELECT * FROM dbo.{typeof(TEntity).GetNameFromType()} AS {typeof(TEntity).GetNameFromType()}");
+            st.AppendLine($" JOIN dbo.{typeof(TModel).GetNameFromType()} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} =  {typeof(TModel).GetNameFromType()}.{outKey}");
+            return new JoinStatement<TEntity>(st);
+        }
+
+
+
+        /// <summary>
+        /// Joins the specified join table.
+        /// </summary>
+        /// <typeparam name="TEntity">The type of the entity.</typeparam>
+        /// <typeparam name="TModel">The type of the model.</typeparam>
+        /// <param name="entity">The entity.</param>
+        /// <param name="innerKey">The inner key.</param>
+        /// <param name="outerKey">The outer key.</param>
+        /// <param name="model">The model.</param>
+        /// <returns></returns>
+        public static JoinStatement<TEntity> JoinOn<TEntity, TModel>(this TEntity entity,
+            Expression<Func<TEntity, object>> innerKey, Expression<Func<TModel, object>> outerKey, object model) where TEntity : class
+            where TModel : class
+        {
+            var innKey = innerKey.GetExpressionParameter();
+            var outKey = outerKey.GetExpressionParameter();
+
+            var st = new StringBuilder($"SELECT * FROM dbo.{typeof(TEntity).GetNameFromType()} AS {typeof(TEntity).GetNameFromType()}");
+            st.AppendLine($" JOIN dbo.{typeof(TModel).GetNameFromType()} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} =  {typeof(TModel).GetNameFromType()}.{outKey}");
+            return new JoinStatement<TEntity>(st, model);
+        }
+
 
         public static JoinStatement<TEntity> JoinOn<TEntity, TModel>(this TEntity entity, IEnumerable<string> selectValues,
          Expression<Func<TEntity, object>> innerKey, Expression<Func<TModel, object>> outerKey, object model) where TEntity : class
