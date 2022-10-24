@@ -368,5 +368,17 @@ namespace QueryHelperTests
             Assert.That(select.Query.Contains("MockId"));
         }
 
+        [Test]
+        public void AndLike_Is_NotNull()
+        {
+            var searchModel = new SearchModel()
+            {
+                MockId = 1,
+                OtherMockName ="someName"
+            };
+            var select =MockClass.Select(searchModel).Where<SearchModel>(x => x.Id, x => x.MockId == 1).AndLike<SearchModel>(x => x.Name, x => x.OtherMockName);
+            Assert.IsNotNull(select);
+        }
+
     }
 }

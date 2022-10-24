@@ -258,14 +258,14 @@ namespace QueryHelper
             return new JoinStatement<T2>(StringQuery, Model);
         }
 
-        public JoinStatement<T2> JoinOn<T2>(Expression<Func<TEntity, object>> innerKey, Expression<Func<T2, object>> outerKey) where T2 : class
+        public JoinStatement<TEntity> JoinOn<T2>(Expression<Func<TEntity, object>> innerKey, Expression<Func<T2, object>> outerKey) where T2 : class
         {
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             StringQuery.AppendLine(
                 $"JOIN dbo.{typeof(T2).GetNameFromType()} AS {typeof(T2).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(T2).GetNameFromType()}.{outKey}");
 
-            return new JoinStatement<T2>(StringQuery, Model);
+            return new JoinStatement<TEntity>(StringQuery, Model);
         }
 
         public JoinStatement<TEntity> JoinOn<T2>(Expression<Func<TEntity, object>> innerKey, Expression<Func<T2, object>> outerKey, string outerTable) where T2 : class
@@ -1211,6 +1211,14 @@ namespace QueryHelper
             var propName = prop.GetExpressionParameter();
             var paramName = param.GetExpressionParameter();
             StringQuery.Append($" AND {propName} LIKE @{paramName}");
+            ModelValues[paramName] = "%" + ModelValues[paramName] + "%";
+            return new AndStatement<TEntity>(StringQuery, Model);
+        }
+
+        public AndStatement<TEntity> AndLike<TModel>(string propertyName,
+         string paramName) where TModel : class
+        {
+            StringQuery.Append($" AND {propertyName} LIKE @{paramName}");
             ModelValues[paramName] = "%" + ModelValues[paramName] + "%";
             return new AndStatement<TEntity>(StringQuery, Model);
         }

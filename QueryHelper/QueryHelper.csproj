@@ -3,14 +3,14 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>DSLINQ</PackageId>
-    <Version>1.2.3</Version>
+    <Version>1.2.5</Version>
     <Authors>martin_leshi</Authors>
     <Language>C#</Language>
     <RepositoryUrl>
       https://github.com/LeshiMartin/dapperSqlLinq
     </RepositoryUrl>
     <Description>
-      Extended The Join and Left join with Join on and Left Join on where it returns the original Entity
+      Build in release version
     </Description>
   </PropertyGroup>
   <ItemGroup>

@@ -717,7 +717,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM {innerTable} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($" JOIN dbo.{joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" JOIN {joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TModel>(st);
         }
 
@@ -740,7 +740,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM {innerTable} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($" JOIN dbo.{joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" JOIN {joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TModel>(st);
         }
 
@@ -850,7 +850,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM {innerTable} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($" JOIN dbo.{joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" JOIN {joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TModel>(st);
         }
 
@@ -873,7 +873,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM {innerTable} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($" JOIN dbo.{joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" JOIN {joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TModel>(st);
         }
 
@@ -989,7 +989,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM {innerTable} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($" JOIN dbo.{typeof(TModel).GetNameFromType()} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" JOIN {typeof(TModel).GetNameFromType()} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TEntity>(st);
         }
 
@@ -1033,7 +1033,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM {innerTable} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($" JOIN dbo.{joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" JOIN {joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TEntity>(st);
         }
 
@@ -1056,7 +1056,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM {innerTable} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($" JOIN dbo.{joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" JOIN {joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TEntity>(st);
         }
 
@@ -1166,7 +1166,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM {innerTable} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($" JOIN dbo.{joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" {joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TEntity>(st);
         }
 
@@ -1189,7 +1189,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM {innerTable} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($" JOIN dbo.{joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" JOIN {joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TEntity>(st);
         }
 
@@ -1211,7 +1211,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM dbo.{typeof(TEntity).GetNameFromType()} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($"LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TModel>(st);
         }
 
@@ -1233,7 +1233,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM dbo.{typeof(TEntity).GetNameFromType()} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($"LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TModel>(st, model);
         }
 
@@ -1255,7 +1255,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM {innerTable} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($"LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TModel>(st);
         }
 
@@ -1278,7 +1278,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM {innerTable} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($"LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TModel>(st);
         }
 
@@ -1300,7 +1300,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM {innerTable} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($"LEFT JOIN dbo.{joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" LEFT JOIN {joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TModel>(st);
         }
 
@@ -1323,7 +1323,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM {innerTable} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($"LEFT JOIN dbo.{joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" LEFT JOIN {joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TModel>(st);
         }
 
@@ -1344,7 +1344,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM dbo.{entity.Name} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($"LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TModel>(st);
         }
 
@@ -1366,7 +1366,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM dbo.{entity.Name} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($"LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TModel>(st, model);
         }
 
@@ -1388,7 +1388,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM {innerTable} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($"LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TModel>(st);
         }
 
@@ -1411,7 +1411,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM {innerTable} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($"LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TModel>(st);
         }
 
@@ -1433,7 +1433,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM {innerTable} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($"LEFT JOIN dbo.{joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" LEFT JOIN {joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TModel>(st);
         }
 
@@ -1456,7 +1456,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM {innerTable} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($"LEFT JOIN dbo.{joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" LEFT JOIN {joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TModel>(st);
         }
 
@@ -1477,7 +1477,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM dbo.{typeof(TEntity).GetNameFromType()} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($"LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TEntity>(st);
         }
 
@@ -1499,7 +1499,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM dbo.{typeof(TEntity).GetNameFromType()} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($"LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TEntity>(st, model);
         }
 
@@ -1521,7 +1521,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM {innerTable} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($"LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TEntity>(st);
         }
 
@@ -1544,7 +1544,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM {innerTable} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($"LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TEntity>(st);
         }
 
@@ -1566,7 +1566,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM {innerTable} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($"LEFT JOIN dbo.{joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" LEFT JOIN {joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TEntity>(st);
         }
 
@@ -1589,7 +1589,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM {innerTable} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($"LEFT JOIN dbo.{joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" LEFT JOIN {joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TEntity>(st);
         }
 
@@ -1610,7 +1610,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM dbo.{entity.Name} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($"LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TEntity>(st);
         }
 
@@ -1632,7 +1632,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM dbo.{entity.Name} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($"LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TEntity>(st, model);
         }
 
@@ -1654,7 +1654,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM {innerTable} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($"LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TEntity>(st);
         }
 
@@ -1677,7 +1677,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM {innerTable} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($"LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" LEFT JOIN dbo.{joinTable.Name} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TEntity>(st);
         }
 
@@ -1699,7 +1699,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM {innerTable} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($"LEFT JOIN dbo.{joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" LEFT JOIN {joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TEntity>(st);
         }
 
@@ -1722,7 +1722,7 @@ namespace QueryHelper
             var innKey = innerKey.GetExpressionParameter();
             var outKey = outerKey.GetExpressionParameter();
             var st = new StringBuilder($"SELECT * FROM {innerTable} AS {typeof(TEntity).GetNameFromType()}");
-            st.AppendLine($"LEFT JOIN dbo.{joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
+            st.AppendLine($" LEFT JOIN {joinTable} AS {typeof(TModel).GetNameFromType()} ON {typeof(TEntity).GetNameFromType()}.{innKey} = {typeof(TModel).GetNameFromType()}.{outKey}");
             return new JoinStatement<TEntity>(st);
         }
 
